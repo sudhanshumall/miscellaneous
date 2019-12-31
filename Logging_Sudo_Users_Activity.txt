@@ -1,0 +1,45 @@
+As a DevOps Engineer/Linux Admin/Linux Security Analyst, you might come into a situation where you have given Linux Machine access to your Development team but you don't know what command those guys are running on the Linux machine.
+
+So, this becomes very important for us to monitor their activity in terms of the command they are firing on the machine.
+
+Logging sudo users activity helps us to identify the USER command in case of any failure.
+
+Here we will Log  SUDO users activity as well as we will send mail to mentioned mail id in case if someone uses command with SUDO.
+
+Follow below steps to log sudo users activity:
+
+1) Login as root
+2) chmod 640 /etc/sudoers (by default /etc/sudoers file has only read access)
+3) vim  /etc/sudoers
+
+added below lines in /etc/sudoers file
+
+###### Log sudo users activity and get mail if they uses command with sudo  ####
+Defaults        syslog=auth, insults, syslog_goodpri=alert
+Defaults        logfile=/var/log/sudo.log
+Defaults        timestamp_timeout=0, log_year, tty_tickets
+Defaults        mailto="mall.sudhanshu90@gmail.com", mail_always, mail_badpass, mail_no_user
+
+Save and Exit
+
+Explanation of above lines:
+
+mail_always -  Will send mail to the mailto user every time a users runs sudo. This flag is off by default.
+
+mail_badpass - Will send mail to the mailto user if the user running sudo does not enter the correct password. This flag is off by default.
+
+mail_no_user - If set, mail will be sent to the mailto user if the invoking user is not in the sudoers file. This flag is on by default.
+
+logfile - All the logs will be saved into the path specified here and you will be able to see all the fired command by the Developers.
+
+4) Make sure to change the file permission of "/etc/sudoers"
+
+chmod 440 /etc/sudoers
+
+=======================================================================
+There might be situation where you do not want to send mail if someone fires command using sudo.
+
+In this case, you can comment last line ie.
+
+#Defaults        mailto="mall.sudhanshu90@gmail.com", mail_always, mail_badpass, mail_no_user
+
