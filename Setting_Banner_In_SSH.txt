@@ -1,0 +1,29 @@
+SSH warning banners and welcome messages are very much necessary when organisation wishes to restrict an unauthorised user access or just give out some information or announcement.
+
+
+Pre login SSH warning banner shows before the password prompt, during an interactive session using SSH. It usually uses for legal warnings to establish the terms and conditions by which someone is allowed to use the system.
+
+The SSH warning messages are commonly located in the files ‘/etc/issue’ and ‘/etc/issue.net’, but you can also use your custom file like ‘/etc/ssh/sshd-banner’. The content of the specified file is sent to the remote user before authentication.
+
+Create an SSH login banner file:
+
+vim /etc/ssh/sshd-banner
+
+Append some Warning text: (example)
+
+WARNING:  Unauthorized access to this system is forbidden and will be
+prosecuted by law. By accessing this system, you agree that your actions
+may be monitored if unauthorized usage is suspected.
+
+Open the sshd_config file:
+
+vim /etc/ssh/sshd_config
+
+Edit the path to the banner file:
+
+Banner /etc/ssh/sshd-banner
+
+Save the file and reload the sshd:
+
+service sshd reload
+
