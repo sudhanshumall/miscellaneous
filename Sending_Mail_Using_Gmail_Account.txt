@@ -1,0 +1,35 @@
+This post is about sending mail using gmail account instead of using Postfix service from Linux terminal
+
+
+
+                                           Follow below steps to achieve the same:
+
+1) Install ssmtp
+
+sudo apt-get install ssmtp
+
+2) Edit the ssmtp config file
+
+   sudo vim /etc/ssmtp/ssmtp.conf
+   Comment everything and paste below content in "/etc/ssmtp/ssmtp.conf" file
+
+##############################
+AuthUser=YOUR_GMAIL_ID
+AuthPass=YOUR_GMAIL_PASSWORD
+FromLineOverride=YES
+mailhub=smtp.gmail.com:587
+UseSTARTTLS=YES
+#############################
+
+3) Stop postfix or sendmail service which is running 
+
+      sudo service sendmail stop or sudo service postfix stop
+
+4) Create a symbolic link for ssmtp to replace sendmail
+
+      sudo ln  -s /usr/sbin/ssmtp /usr/sbin/sendmail
+
+5) That's it. Now test using below command
+
+echo "test" | mail -s "Subject" "MAIL_ID"
+
