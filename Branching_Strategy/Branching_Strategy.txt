@@ -1,0 +1,94 @@
+Master branch
+This is the main branch of the repository from which we make releases to the production server.
+
+Rules:
+
+Access is restricted.
+
+Changes can be submitted only through Pull Requests. No direct commits are allowed.
+
+Should always have the latest release version on production release server.
+
+Should never have unreleased code(commits made but not yet released).
+
+
+Develop branch
+This is the main 'development' branch of the repository from which we make alpha/beta releases. This branch is based on the 'master' branch on creation. It tracks the current development.
+
+Rules:
+
+Access is restricted.
+
+No direct commits are allowed under normal circumstances. If a situation arises, direct commits can be made with the approval of the entire team.
+
+Changes can be submitted through Pull Requests.
+
+During a feature development, no pull requests should be made from user branches to develop directly. Pull requests are made from feature branches to 'develop'. (user_branch --> feature_branch --> develop)
+
+Pull requests should be approved by all the team members.
+
+Should always have the latest alpha/beta release version. It shouldn't have unreleased code(Commits made but not released yet).
+
+Base branch for user/feature branches.
+
+
+Feature branches
+This is the main branch for the feature under development. This branch is based on 'develop' branch on creation. As we work on a new feature, we create a feature branch as 'develop_feature' based on the 'develop' branch. Until the completion of the feature, 'develop_feature' branch will serve as the base branch for development.
+
+Rules:
+
+Access is restricted.
+
+Direct commits are allowed as long as the changes are minor or there is only one person working on the feature branch.
+
+Changes can be submitted through Pull Requests.
+
+Pull requests should be approved by all the team members.
+
+Should always to be merged back to 'develop' after completing the feature. It shouldn't have commits that aren't merged with 'develop' after completion of the feature.
+
+Feature branches are eligible for deletion once they are merged into 'develop' branch and tagged appropriately. Feature branches can be deleted once they are released to 'production'.
+
+alpha/beta releases can be made from the feature branch if necessary.
+
+
+User branches
+User branches are created from 'develop' or 'feature' branches for individual developers. It usually follows the format, 'develop_username' or 'develop_feature_user' depends on the base branch.
+
+Rules:
+
+More than one branch can be available for the same developer, e.g., develop_username, develop_username_06_05_2017 or develop_feature_username, develop_feature_username_2
+
+Direct commits into one user branch aren't allowed by another user.
+
+Changes can be submitted through Pull Requests.
+
+Pull requests should be approved by the owner of the branch.
+
+Releases should never be made from user branch, although intermediate test releases to QA can be done if a situation arises.
+
+User branches based on 'feature' branches can be deleted once the feature is merged into develop and released to alpha/beta.
+
+
+Bug-fix/Escalation/Test branches
+These branches are temporary branches created to fix a bug or address an escalation or perform some minor testing. The branches can be based on 'develop' or 'feature' branches. It should follow the naming conventions appropriately to indicate the purpose of the branch.
+
+e.g, develop_JIRA-1511, develop_ESC-1008.
+
+The reason for this naming convention is that the Atlassian products are interconnected and they can link these branches to the appropriate bugs automatically if the branches are named appropriately.
+
+Rules:
+
+Direct commits are allowed.
+
+More than one branch can be available for a bug-fix, escalation or testing. To differentiate, the developer can use numbers, username, etc.
+
+Changes can be submitted through Pull Requests.
+
+When submitting Pull Request, it is recommended to choose 'Close the branch after merge'.
+
+These branches can manually be deleted after merging.
+
+Obsolete branches are eligible for deletion. It is up to the developer to ensure that the changes are submitted to 'develop' or 'develop_feature' branches through Pull Requests.
+
+Releases should never be made from these type of branches.
